@@ -31,3 +31,4 @@ func! Run_elisp()
   :normal %
 endfunc
 nnoremap <silent><leader>fv :call Run_elisp()<CR>
+nnoremap <silent><C-x><C-e> :call Run_elisp()<CR>
