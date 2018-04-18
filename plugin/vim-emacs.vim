@@ -1,12 +1,16 @@
 " import emacs keymap
 inoremap <C-A> <HOME>
 inoremap <C-E> <END>
-inoremap <C-b> <Left>
-inoremap <C-f> <right>
+inoremap <C-B> <Left>
+inoremap <C-F> <Right>
+inoremap <C-D> <DELETE>
+inoremap <C-Y> <C-R>"
 cnoremap <C-A> <HOME>
 cnoremap <C-E> <END>
-cnoremap <C-b> <Left>
-cnoremap <C-f> <right>
+cnoremap <C-B> <Left>
+cnoremap <C-F> <Right>
+cnoremap <C-D> <DELETE>
+cnoremap <C-Y> <C-R>"
 nnoremap <C-A> <HOME>
 nnoremap <C-E> <END>
 "imap <C-A> <ESC>^i
