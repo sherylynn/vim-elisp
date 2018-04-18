@@ -5,14 +5,14 @@ inoremap <C-b> <Left>
 inoremap <C-f> <Right>
 inoremap <C-d> <Del>
 inoremap <C-y> <C-r>"
-inoremap <C-k> <S-End><Del>
+"inoremap <C-k> <S-End><Del>
 cnoremap <C-a> <Home>
 cnoremap <C-e> <End>
 cnoremap <C-b> <Left>
 cnoremap <C-f> <Right>
 cnoremap <C-d> <Del>
 cnoremap <C-y> <C-R>"
-cnoremap <C-k> <S-End><Del>
+"cnoremap <C-k> <S-End><Del>
 nnoremap <C-a> <Home>
 nnoremap <C-e> <End>
 "imap <C-A> <ESC>^i
