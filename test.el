@@ -8,3 +8,6 @@
 (defun hello (x)
   (message x))
 (hello "elisp")
+(defun add (x y)
+  (print (+ x y)))
+(add 2 2)
