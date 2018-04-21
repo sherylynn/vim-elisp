@@ -6,4 +6,8 @@ need emacs to interprete elisp
 
 so install emacs first
 
-<C-x><C-e> to run elisp in vim
+<C-x><C-e> to run local elisp in vim
+
+## Run
+
+<leader>r to run whole file 

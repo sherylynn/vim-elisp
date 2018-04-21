@@ -4,7 +4,7 @@ endif
 "定义 可以多个关键词放一组 叫什么只是称呼，是后面link的高亮
 "也可以多次定义划分几行 效果一致
 ":help group-name 常见配色高亮组
-syntax keyword elispKeyword car cdr cond cons
+syntax keyword elispKeyword car cdr cond cons queto
 syntax keyword elispKeyword defun lambda setq progn let push mapcar while
 "emacs 内置函数 针对emacs自身
 syntax keyword elispFunction other-window switch-to-buffer-other-window 
@@ -21,7 +21,8 @@ syntax match elispOperator "\v\+"
 syntax match elispOperator "\v-"
 "字符串
 syntax region elispString start=/\v"/ skip=/\v\\./ end=/\v"/
-syntax region elispString start=/\v'/ skip=/\v\\./ end=/\v'/
+"' 代表了 queto 所以不能拿来注释
+"syntax region elispString start=/\v'/ skip=/\v\\./ end=/\v'/
 "链接组
 highlight link elispKeyword keyword
 highlight link elispFunction Function
