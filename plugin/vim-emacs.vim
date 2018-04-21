@@ -32,3 +32,6 @@ func! Run_elisp()
 endfunc
 nnoremap <silent><leader>fv :call Run_elisp()<CR>
 nnoremap <silent><C-x><C-e> :call Run_elisp()<CR>
+inoremap <silent><C-x><C-e> <Esc>:call Run_elisp()<CR>i
+"C-s会挂起终端
+"inoremap <silent><C-x><C-s> <Esc>:w<CR>
