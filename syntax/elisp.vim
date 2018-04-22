@@ -18,7 +18,7 @@ endif
 syntax match elispFunction "\m\(.*(\)\@<=\(.\{-}\s\)"
 "------------------------------------------------------------
 ":help group-name 常见配色高亮组
-syntax keyword elispKeyword car cdr cond cons queto
+syntax keyword elispKeyword car cdr cond cons queto atom
 syntax keyword elispKeyword defun lambda setq progn let push mapcar while
 "emacs 内置函数 针对emacs自身
 syntax keyword elispSpecial other-window switch-to-buffer-other-window 
