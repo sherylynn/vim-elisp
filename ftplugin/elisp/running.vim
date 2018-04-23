@@ -1,7 +1,7 @@
 "依靠的执行器
 if !exists("g:elisp_command")
-  let g:elisp_command="cat"
-  let g:command_option=" "
+  let g:elisp_command="emacs"
+  let g:command_option=" -Q -nw -batch -l "
 endif
 ""%"代表当前buffer "#"表示之前buffer
 func! ElispRunFile()
