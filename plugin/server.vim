@@ -16,7 +16,7 @@ let g:emacsserver_command="emacs -Q -nw --daemon"
 let g:try_emacsclient=system(g:emacsclient_command)
 "echo g:try_emacsclient
 "matchstr 是使用正则搜索并给出搜索的结果
-if matchstr(g:try_emacsclient,'socket-name')=='socket-name'
+if matchstr(g:try_emacsclient,'server-file')=='server-file'
   "没启动，需要启动
   let g:try_emacsserver=system(g:emacsserver_command)
   if matchstr(g:try_emacsserver,'')
