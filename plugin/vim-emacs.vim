@@ -27,9 +27,12 @@ nnoremap <C-e> <End>
 func! Run_elisp()
   :normal %v%y
   let g:elisp_script=@"
-  :echo system("emacsclient -eval '(prin1" . g:elisp_script . ")'")
-"  :echo system("emacs -Q -batch -eval '(prin1" . g:elisp_script . ")'")
-  :normal %
+"  if has('win32')||has('win64')
+"    :echo system("emacs -Q -batch -eval '(prin1" . g:elisp_script . ")'")
+"  else
+    :echo system("emacsclient -eval '(prin1" . g:elisp_script . ")'")
+    :normal %
+"  endif
 endfunc
 nnoremap <silent><leader>fv :call Run_elisp()<CR>
 nnoremap <silent><C-x><C-e> :call Run_elisp()<CR>
