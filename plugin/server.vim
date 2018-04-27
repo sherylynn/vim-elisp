@@ -35,32 +35,22 @@ endif
 "---------------------------
 if !exists("*EmacsDaemon")
   func EmacsDaemon()
-    let server_job=job_start(g:emacsserver_command,{"out_cb":"EmacsKeep","err_cb":"EmacsErr"})
+    let server_job=job_start(g:emacsserver_command,{"callback":"EmacsHandler"})
   endfunc
 endif
-if !exists("*EmacsKeep")
-  func EmacsKeep(channel,msg)
-    echom a:msg
-    let l:status=matchstr(a:msg,'\m\(starting\)')
-    if l:status=='starting'
+if !exists("*EmacsHandler")
+  func EmacsHandler(channel,msg)
+"    let l:status=matchstr(a:msg,'\m\(such\)')
+"    let l:status=matchstr(a:msg,'such')
+    let l:status=matchstr(a:msg,'\v(Starting)|(such)')
+    if l:status=='Starting'
       "save status
-      let g:emacsstatus="started"
+      echom "emacs started"
+    elseif l:status=='such'
+      echom "had u installed emacs?"
     else
-      "is installed?
-"      echom "are you installed emacs ?"
+      "因为是流式传输,没符合的直接漏出来了
+"      echom a:msg
     endif
-  endfunc
-endif
-if !exists("*EmacsErr")
-  func EmacsErr(channel,msg)
-    echom a:msg
-"    let l:status=matchstr(a:msg,'\m\(starting\)')
-"    if l:status=='starting'
-"      "save status
-"      let g:emacsstatus="started"
-"    else
-"      "is installed?
-"      echom "are you installed emacs ?"
-"    endif
   endfunc
 endif
