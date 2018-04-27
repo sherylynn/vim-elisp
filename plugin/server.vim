@@ -1,19 +1,15 @@
-"try
-"  !emacsclient -eval "(- 1 2)"
-"catch /\msocket/
-"  !emacs -Q -nw -daemon
-"endtry
-"try
-"  echo g:test
-""没有参数等同捕获所有错误
-"catch /121/
-""catch /.*/
-"  echo "catch all"
-"endtry
-"try catch的match不能匹配获得的结果
-let g:emacsclient_command="emacsclient -eval '(print (+ 1 1))'"
+if !exists("*Async_Just_Err")
+  func Async_Just_Err(run,err)
+    let l:just_run_job=job_start(a:run,{"out_cb":"Just_run","err_cb":"Just_err"})
+  endfunc
+endif
+let g:emacsclient_command="emacsclient --eval '(print (+ 1 1))'"
 let g:emacsserver_command="emacs -Q --daemon"
-let g:try_emacsclient=system(g:emacsclient_command)
+if has("win32")||has("win64")
+  let g:try_emacsclient="待定"
+else
+  let g:try_emacsclient=system(g:emacsclient_command)
+endif
 "echo g:try_emacsclient
 "matchstr 是使用正则搜索并给出搜索的结果
 if matchstr(g:try_emacsclient,'server-file')=='server-file'
