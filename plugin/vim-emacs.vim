@@ -30,7 +30,12 @@ func! Run_elisp()
 "  if has('win32')||has('win64')
 "    :echo system("emacs -Q -batch -eval '(prin1" . g:elisp_script . ")'")
 "  else
+" '情况会失效
     :echo system("emacsclient -eval '(prin1" . g:elisp_script . ")'")
+" 发现问题在终端也是存在的
+"    :echo system("emacsclient -eval " . ' "(prin1' . g:elisp_script . ')"')
+    ""会失效
+"    :echo system('emacsclient -eval "(prin1' . g:elisp_script . ')"')
     :normal %
 "  endif
 endfunc
