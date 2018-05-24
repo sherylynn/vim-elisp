@@ -13,8 +13,8 @@ cnoremap <C-f> <Right>
 cnoremap <C-d> <Del>
 cnoremap <C-y> <C-R>"
 "cnoremap <C-k> <S-End><Del>
-nnoremap <C-a> <Home>
-nnoremap <C-e> <End>
+"nnoremap <C-a> <Home>
+"nnoremap <C-e> <End>
 "imap <C-A> <ESC>^i
 "imap <C-E> <ESC>$a
 "imap <C-K> <ESC>d$i
