@@ -20,19 +20,7 @@ if has("win32")||has("win64")
 else
   let g:try_emacsclient=system(g:emacsclient_command)
 endif
-"echo g:try_emacsclient
-"matchstr 是使用正则搜索并给出搜索的结果
-if matchstr(g:try_emacsclient,'server-file')=='server-file'
-  "没启动，需要启动
-  echom "starting___"
-  call EmacsDaemon()
-else
-  "说明正常
-endif
-"太困了智商都下降了
-"-------------------------------------------------------
-"TODO
-"---------------------------
+
 if !exists("*EmacsDaemon")
   func EmacsDaemon()
     let server_job=job_start(g:emacsserver_command,{"callback":"EmacsHandler"})
@@ -54,3 +42,16 @@ if !exists("*EmacsHandler")
     endif
   endfunc
 endif
+"echo g:try_emacsclient
+"matchstr 是使用正则搜索并给出搜索的结果
+if matchstr(g:try_emacsclient,'server-file')=='server-file'
+  "没启动，需要启动
+  echom "starting___"
+  call EmacsDaemon()
+else
+  "说明正常
+endif
+"太困了智商都下降了
+"-------------------------------------------------------
+"TODO
+"---------------------------
