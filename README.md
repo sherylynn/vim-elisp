@@ -11,3 +11,7 @@ so install emacs first
 ## Run
 
 <leader>r to run whole file 
+
+## Eval elisp in vimscript
+
+Elisp("(+ 1 1)")
