@@ -23,6 +23,9 @@ cnoremap <C-y> <C-R>"
 "map <C-E> $
 "map <C-K> d$
 
+func! g:Elisp(script)
+  return system("emacsclient -eval '(prin1" . a:script . ")'")
+endfunc
 " import elisp
 func! Run_elisp()
   :normal %v%y
