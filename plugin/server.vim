@@ -1,3 +1,4 @@
+let g:elisp_debug=0
 if !exists("*Async_Just_Err")
   func Async_Just_Err(run,err)
     let l:just_run_job=job_start(a:run,{"out_cb":"Just_run","err_cb":"Just_err"})
@@ -20,33 +21,60 @@ if has("win32")||has("win64")
 else
   let g:try_emacsclient=system(g:emacsclient_command)
 endif
-
-if !exists("*EmacsDaemon")
-  func EmacsDaemon()
-    let server_job=job_start(g:emacsserver_command,{"callback":"EmacsHandler"})
-  endfunc
-endif
-if !exists("*EmacsHandler")
-  func EmacsHandler(channel,msg)
-"    let l:status=matchstr(a:msg,'\m\(such\)')
-"    let l:status=matchstr(a:msg,'such')
-    let l:status=matchstr(a:msg,'\v(Starting)|(such)')
-    if l:status=='Starting'
-      "save status
-      echom "emacs started"
-    elseif l:status=='such'
-      echom "had u installed emacs?"
-    else
-      "因为是流式传输,没符合的直接漏出来了
-"      echom a:msg
-    endif
-  endfunc
+if has("nvim")
+  if !exists("*EmacsHandler")
+    func EmacsHandler(job_id,data,event) dict
+      let l:status=matchstr(string(a:data),'\v(Starting)|(such)')
+      if l:status=='Starting'
+        "save status
+        echom "emacs started"
+      elseif l:status=='such'
+        echom "had u installed emacs?"
+      else
+        "因为是流式传输,没符合的直接漏出来了
+  "      echom a:msg
+      endif
+    endfunc
+  endif
+  let s:callbacks = {
+    \ 'on_stdout': 'EmacsHandler',
+    \ 'stdout_buffered':v:true
+    \ }
+  if !exists("*EmacsDaemon")
+    func EmacsDaemon()
+      let server_job=jobstart(g:emacsserver_command,s:callbacks)
+    endfunc
+  endif
+elseif has("job")
+  if !exists("*EmacsDaemon")
+    func EmacsDaemon()
+      let server_job=job_start(g:emacsserver_command,{"callback":"EmacsHandler"})
+    endfunc
+  endif
+  if !exists("*EmacsHandler")
+    func EmacsHandler(channel,msg)
+  "    let l:status=matchstr(a:msg,'\m\(such\)')
+  "    let l:status=matchstr(a:msg,'such')
+      let l:status=matchstr(a:msg,'\v(Starting)|(such)')
+      if l:status=='Starting'
+        "save status
+        echom "emacs started"
+      elseif l:status=='such'
+        echom "had u installed emacs?"
+      else
+        "因为是流式传输,没符合的直接漏出来了
+  "      echom a:msg
+      endif
+    endfunc
+  endif
 endif
 "echo g:try_emacsclient
 "matchstr 是使用正则搜索并给出搜索的结果
 if matchstr(g:try_emacsclient,'server-file')=='server-file'
   "没启动，需要启动
-  echom "starting___"
+  if g:elisp_debug==1
+    echom 'starting___'
+  endif
   call EmacsDaemon()
 else
   "说明正常
